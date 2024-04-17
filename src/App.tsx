@@ -1,9 +1,13 @@
 import React from "react";
 
-import "./App.css";
+import TextParticle from "./Component/TextParticle";
 
 function App() {
-    return <div className="App">ㄴㅇㄹㅁㅇㄹㅁㅇㄹㅁㅇㄹㅁㅇㄹ</div>;
+    return (
+        <div className="App">
+            <TextParticle />
+        </div>
+    );
 }
 
 export default App;
