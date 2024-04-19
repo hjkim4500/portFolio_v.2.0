@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const CanvasStyle = styled.canvas`
@@ -16,11 +16,20 @@ const CanvasInput = styled.input`
 `;
 
 function TextParticle() {
+    const [inputValue, setInputValue] = useState("WELCOME TO MY PORTFOLIO");
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const handleChange = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setInputValue(event.target.value);
+    };
+
     useEffect(() => {
         const canvas = canvasRef.current!;
         const inputText = inputRef.current!;
+
         const ctx = canvas.getContext("2d", {
             willReadFrequently: true,
         }) as CanvasRenderingContext2D;
@@ -177,6 +186,7 @@ function TextParticle() {
                 });
             }
             wrapText(text: string) {
+                console.log(text);
                 // const gradient = this.context.createLinearGradient(
                 //     0,
                 //     0,
@@ -285,7 +295,8 @@ function TextParticle() {
         }
 
         const effect = new Effect(ctx, canvas.width, canvas.height);
-        effect.wrapText(effect.textInput.value);
+
+        effect.wrapText(inputValue);
         // this.setTimeout(function () {
         //     effect.textInput.value = "MADE BY HJKIM";
         //     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -303,7 +314,7 @@ function TextParticle() {
             canvas.width = this.window.innerWidth;
             canvas.height = this.window.innerHeight;
             effect.resize(canvas.width, canvas.height);
-            effect.wrapText(effect.textInput.value);
+            effect.wrapText(inputValue);
         });
     }, []);
     return (
@@ -314,7 +325,8 @@ function TextParticle() {
                 type="text"
                 id="textInput"
                 placeholder="Type something.."
-                value="WELCOME TO MY PORTFOLIO"
+                value={inputValue}
+                onChange={handleChange}
             />
         </>
     );
