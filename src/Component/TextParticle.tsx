@@ -299,7 +299,7 @@ function TextParticle() {
             effect.wrapText(inputValue);
         });
     }, []);
-
+    useEffect(() => {}, [inputValue]);
     return (
         <>
             <CanvasStyle ref={canvasRef} id="canvas1"></CanvasStyle>;
