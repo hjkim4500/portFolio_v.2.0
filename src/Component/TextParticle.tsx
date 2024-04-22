@@ -106,7 +106,8 @@ function TextParticle() {
         constructor(
             context: CanvasRenderingContext2D,
             canvasWidth: number,
-            canvasHeight: number
+            canvasHeight: number,
+            input: HTMLInputElement
         ) {
             this.context = context;
             this.canvasWidth = canvasWidth;
@@ -116,7 +117,7 @@ function TextParticle() {
             this.fontSize = this.canvasWidth * 0.11;
             this.lineHeight = this.fontSize * 1.2;
             this.maxTextWidth = this.canvasWidth * 0.8;
-            this.textInput = inputRef.current!;
+            this.textInput = input;
             this.verticalOffset = 0; // 크기에 따라 위치 조정..
             this.textInput.addEventListener("keyup", (e) => {
                 if (e.key !== " ") {
@@ -169,7 +170,7 @@ function TextParticle() {
             });
         }
         wrapText(text: string) {
-            console.log(inputValue);
+            // console.log(inputValue);
             // const gradient = this.context.createLinearGradient(
             //     0,
             //     0,
@@ -269,6 +270,7 @@ function TextParticle() {
 
     useEffect(() => {
         const canvas = canvasRef.current!;
+        const input = inputRef.current!;
 
         const ctx = canvas.getContext("2d", {
             willReadFrequently: true,
@@ -276,7 +278,7 @@ function TextParticle() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const effect = new Effect(ctx, canvas.width, canvas.height);
+        const effect = new Effect(ctx, canvas.width, canvas.height, input);
 
         effect.wrapText(inputValue);
         // this.setTimeout(function () {
@@ -298,8 +300,8 @@ function TextParticle() {
             effect.resize(canvas.width, canvas.height);
             effect.wrapText(inputValue);
         });
-    }, []);
-    useEffect(() => {}, [inputValue]);
+    }, [inputValue]);
+    // useEffect(() => {}, [inputValue]);
     return (
         <>
             <CanvasStyle ref={canvasRef} id="canvas1"></CanvasStyle>;
