@@ -300,6 +300,7 @@ function TextParticle() {
             effect.resize(canvas.width, canvas.height);
             effect.wrapText(inputValue);
         });
+        console.log(inputValue);
     }, [inputValue]);
     // useEffect(() => {}, [inputValue]);
     return (
