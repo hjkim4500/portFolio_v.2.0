@@ -300,9 +300,18 @@ function TextParticle() {
             effect.resize(canvas.width, canvas.height);
             effect.wrapText(inputValue);
         });
+    }, []);
+    useEffect(() => {
+        const canvas = canvasRef.current!;
+        const ctx = canvas.getContext("2d", {
+            willReadFrequently: true,
+        }) as CanvasRenderingContext2D;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         console.log(inputValue);
     }, [inputValue]);
-    // useEffect(() => {}, [inputValue]);
     return (
         <>
             <CanvasStyle ref={canvasRef} id="canvas1"></CanvasStyle>;
