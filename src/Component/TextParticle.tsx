@@ -128,7 +128,7 @@ function TextParticle() {
                         this.canvasHeight
                     );
 
-                    this.wrapText(inputValue);
+                    //this.wrapText(inputValue); //이부분이 있어서 되질 않았음..
                     // this.wrapText(e.target.value);
                 }
             });
@@ -279,14 +279,13 @@ function TextParticle() {
         canvas.height = window.innerHeight;
 
         const effect = new Effect(ctx, canvas.width, canvas.height, input);
-
+        console.log(effect);
         effect.wrapText(inputValue);
         // this.setTimeout(function () {
         //     effect.textInput.value = "MADE BY HJKIM";
         //     ctx.clearRect(0, 0, canvas.width, canvas.height);
         //     effect.wrapText(effect.textInput.value);
         // }, 3000);
-        effect.render();
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             effect.render();
@@ -300,18 +299,18 @@ function TextParticle() {
             effect.resize(canvas.width, canvas.height);
             effect.wrapText(inputValue);
         });
-    }, []);
-    useEffect(() => {
-        const canvas = canvasRef.current!;
-        const ctx = canvas.getContext("2d", {
-            willReadFrequently: true,
-        }) as CanvasRenderingContext2D;
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        console.log(inputValue);
     }, [inputValue]);
+    // useEffect(() => {
+    //     const canvas = canvasRef.current!;
+    //     const ctx = canvas.getContext("2d", {
+    //         willReadFrequently: true,
+    //     }) as CanvasRenderingContext2D;
+    //     canvas.width = window.innerWidth;
+    //     canvas.height = window.innerHeight;
+
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //     console.log(inputValue);
+    // }, [inputValue]);
     return (
         <>
             <CanvasStyle ref={canvasRef} id="canvas1"></CanvasStyle>;
