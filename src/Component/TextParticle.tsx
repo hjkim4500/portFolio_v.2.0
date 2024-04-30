@@ -313,7 +313,6 @@ function TextParticle() {
     // }, [inputValue]);
     return (
         <>
-            <CanvasStyle ref={canvasRef} id="canvas1"></CanvasStyle>;
             <CanvasInput
                 ref={inputRef}
                 type="text"
@@ -322,6 +321,7 @@ function TextParticle() {
                 value={inputValue}
                 onChange={handleChange}
             />
+            <CanvasStyle ref={canvasRef} id="canvas1"></CanvasStyle>;
         </>
     );
 }
