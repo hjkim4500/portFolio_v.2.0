@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./style/GlobalStyles";
+
 import { theme } from "./style/theme";
 
 const root = ReactDOM.createRoot(

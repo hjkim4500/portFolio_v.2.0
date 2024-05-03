@@ -1,6 +1,6 @@
 export const theme = {
     color: {
-        primary: "cyan", // 주 색상
+        primary: "#02dbc6", // 주 색상
         secondary: "#795548", // 부 색상
         white: "#FFFFFF",
         gray: "#CCCCCC",

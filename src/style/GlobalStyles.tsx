@@ -3,12 +3,20 @@ import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle` 
 ${reset}
+@font-face {
+	font-family: "OrbitronBlack";
+	font-style: normal;
+	font-weight: bold;
+	src: local('../assets/font/OrbitronBlack.ttf'), local('OrbitronBlack') format('truetype');
+
+}
 
 * {
 	box-sizing: border-box;
 }
     
 body {
+	overflow-x: hidden;
 	font-family: apple-system, 'Open Sans', sans-serif;
 }
 

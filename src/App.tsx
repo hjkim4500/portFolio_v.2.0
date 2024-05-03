@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-
+import { useGSAP } from "@gsap/react";
 import TextParticle from "./Component/TextParticle";
 import styled from "styled-components";
 import gsap from "gsap";
@@ -11,6 +11,20 @@ const Section = styled.div`
     height: 100vh;
     position: relative;
     background-color: #222222;
+    &.section2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 10vh;
+        font-family: "OrbitronBlack", sans-serif;
+    }
+    .text {
+        transform: translateY(0px); /* 시작 위치를 아래로 조정합니다. */
+        position: absolute;
+        color: #02dbc6;
+        font-family: " Orbitron";
+    }
 `;
 const ParallaxProgress = styled.progress`
     position: fixed;
@@ -54,11 +68,11 @@ const ParallaxProgress = styled.progress`
     }
 `;
 function App() {
-    const sectionRef = useRef<HTMLDivElement>(null); // DOM 요소에 접근하기 위한 ref 생성
+    const section_1Ref = useRef<HTMLDivElement>(null); // DOM 요소에 접근하기 위한 ref 생성
 
-    useEffect(() => {
-        const panel = sectionRef.current!; // sectionRef를 통해 DOM 요소에 접근
-        const stInstance = ScrollTrigger.create({
+    useGSAP(() => {
+        const panel = section_1Ref.current!;
+        ScrollTrigger.create({
             trigger: panel,
             start: "top top",
             pin: true,
@@ -69,17 +83,35 @@ function App() {
             ease: "none",
             scrollTrigger: { scrub: 0.3 },
         });
-        return () => {
-            // ScrollTrigger의 인스턴스를 제거해주는 코드
-            stInstance.kill();
-        };
-    }, []);
+        const Sec2 = gsap.timeline();
+        Sec2.from(".section2 .t1", { autoAlpha: 0, duration: 1, y: 30 }, "+=1")
+            .to(".section2 .t1", { autoAlpha: 0, duration: 0.25 }, "+=1")
+            .from(".section2 .t2", { autoAlpha: 0, duration: 1, y: 30 }, "+=1")
+            .to(".section2 .t2", { autoAlpha: 0, duration: 0.25 }, "+=1")
+            .from(".section2 .t3", { autoAlpha: 0, duration: 1, y: 30 }, "+=1")
+            .to(".section2 .t3", { scale: 60, duration: 2, autoAlpha: 3 })
+            .to(".section2 .t3", { autoAlpha: 0, duration: 0.5 });
+        ScrollTrigger.create({
+            animation: Sec2,
+            trigger: ".section2",
+            start: "top top",
+            end: "+=3000",
+            scrub: true,
+            pin: true,
+            markers: true,
+            anticipatePin: 1,
+        });
+    });
     return (
         <div className="App">
-            <Section ref={sectionRef}>
+            <Section ref={section_1Ref}>
                 <TextParticle />
             </Section>
-            <Section></Section>
+            <Section className="section2">
+                <div className="text t1">HELLO!</div>
+                <div className="text t2">I'M FRONTEND</div>
+                <div className="text t3">DEVELOPER!</div>
+            </Section>
             <Section></Section>
             <Section></Section>
             <Section></Section>

@@ -279,7 +279,6 @@ function TextParticle() {
         canvas.height = window.innerHeight;
 
         const effect = new Effect(ctx, canvas.width, canvas.height, input);
-        console.log(effect);
         effect.wrapText(inputValue);
         // this.setTimeout(function () {
         //     effect.textInput.value = "MADE BY HJKIM";
@@ -300,17 +299,7 @@ function TextParticle() {
             effect.wrapText(inputValue);
         });
     }, [inputValue]);
-    // useEffect(() => {
-    //     const canvas = canvasRef.current!;
-    //     const ctx = canvas.getContext("2d", {
-    //         willReadFrequently: true,
-    //     }) as CanvasRenderingContext2D;
-    //     canvas.width = window.innerWidth;
-    //     canvas.height = window.innerHeight;
 
-    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //     console.log(inputValue);
-    // }, [inputValue]);
     return (
         <>
             <CanvasInput
