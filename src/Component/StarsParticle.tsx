@@ -103,8 +103,6 @@ function StarsParticle() {
                 );
             }
         }
-
-        const starCanvas = new StarCanvas();
     }, []);
     return (
         <>
