@@ -103,7 +103,6 @@ function StarsParticle() {
                 );
             }
         }
-        console.log("test...");
     }, []);
     return (
         <>
