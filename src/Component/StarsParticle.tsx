@@ -1,16 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+
 const CanvasStyle = styled.canvas`
     background-color: black;
     margin: 0;
     padding: 0;
 `;
+
 interface Particle {
     x: number;
     y: number;
     size: number;
     speed: number;
+    opacity: number;
+    opacityChangeSpeed: number;
 }
+
 function StarsParticle() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -19,6 +24,7 @@ function StarsParticle() {
         const ctx = canvas.getContext("2d", {
             willReadFrequently: true,
         }) as CanvasRenderingContext2D;
+
         class StarCanvas {
             width: number;
             height: number;
@@ -28,14 +34,11 @@ function StarsParticle() {
             scrollTimeout: any;
 
             constructor() {
-                // this.canvas = canvasRef.current!;
-                // this.ctx = this.canvas.getContext("2d");
-
                 this.width = canvas.width = window.innerWidth;
-                this.height = canvas.height = window.innerHeight * 3;
+                this.height = canvas.height = window.innerHeight;
 
                 this.particles = [];
-                this.particleCount = 200;
+                this.particleCount = 100;
                 this.isScrolling = false;
 
                 this.init();
@@ -46,8 +49,10 @@ function StarsParticle() {
                     this.particles.push({
                         x: Math.random() * this.width,
                         y: Math.random() * this.height,
-                        size: Math.random() * 4 + 1, // 1 ~ 6 사이 크기
-                        speed: Math.random() * 1 + 0.1, // 기본 속도
+                        size: Math.random() * 4 + 2,
+                        speed: Math.random() * 1 + 0.2,
+                        opacity: Math.random(),
+                        opacityChangeSpeed: Math.random() * 0.02 + 0.00001, // 0.01 ~ 0.03
                     });
                 }
             }
@@ -56,27 +61,38 @@ function StarsParticle() {
                 ctx.clearRect(0, 0, this.width, this.height);
                 this.particles.forEach((p) => {
                     ctx.beginPath();
-                    ctx.fillStyle = "#02dbc6";
+                    const gradient = ctx.createRadialGradient(
+                        p.x,
+                        p.y,
+                        0,
+                        p.x,
+                        p.y,
+                        p.size
+                    );
+                    gradient.addColorStop(0, `rgba(2, 219, 198, ${p.opacity})`);
+                    gradient.addColorStop(1, `rgba(2, 219, 198, 0)`);
+                    ctx.fillStyle = gradient;
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2, false);
                     ctx.fill();
 
-                    // 위로 이동. 스크롤 시 원근감 조절.
                     p.y -= p.speed;
 
-                    // 화면 위로 넘어가면 아래에서 다시 시작.
                     if (p.y <= -10) {
                         p.y = this.height + 10;
                         p.x = Math.random() * this.width;
                     }
 
                     if (this.isScrolling) {
-                        // 크기가 작은 파티클은 더 빨리 움직임.
                         if (p.size < 3) {
                             p.y -= p.speed * 2;
                         } else {
-                            // 크기가 큰 파티클은 상대적으로 느리게.
                             p.y -= p.speed * 0.5;
                         }
+                    }
+
+                    p.opacity += p.opacityChangeSpeed;
+                    if (p.opacity <= 0 || p.opacity >= 1) {
+                        p.opacityChangeSpeed = -p.opacityChangeSpeed;
                     }
                 });
 
@@ -95,7 +111,6 @@ function StarsParticle() {
                 this.createParticles();
                 this.drawParticles();
 
-                // 스크롤 이벤트 리스너 추가
                 window.addEventListener(
                     "scroll",
                     this.onScroll.bind(this),
@@ -103,10 +118,36 @@ function StarsParticle() {
                 );
             }
         }
+
+        const starCanvas = new StarCanvas();
+
+        let animationFrameId = requestAnimationFrame(
+            starCanvas.drawParticles.bind(starCanvas)
+        );
+
+        const resizeHandler = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            starCanvas.width = canvas.width;
+            starCanvas.height = canvas.height;
+        };
+        window.addEventListener("resize", resizeHandler);
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener("resize", resizeHandler);
+            window.removeEventListener(
+                "scroll",
+                starCanvas.onScroll.bind(starCanvas)
+            );
+        };
     }, []);
+
     return (
         <>
             <CanvasStyle ref={canvasRef} id="canvas1"></CanvasStyle>
         </>
     );
 }
+
+export default StarsParticle;

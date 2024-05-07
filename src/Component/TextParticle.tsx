@@ -192,7 +192,7 @@ function TextParticle() {
                 this.textY,
                 letterSpacing
             );
-            this.context.font = this.fontSize + "px Orbitron";
+            this.context.font = this.fontSize + "px 'OrbitronBlack'";
 
             //break multiline text
             let linesArray = [];
@@ -280,24 +280,25 @@ function TextParticle() {
 
         const effect = new Effect(ctx, canvas.width, canvas.height, input);
         effect.wrapText(inputValue);
-        // this.setTimeout(function () {
-        //     effect.textInput.value = "MADE BY HJKIM";
-        //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-        //     effect.wrapText(effect.textInput.value);
-        // }, 3000);
-        function animate() {
+
+        let animationFrameId = requestAnimationFrame(function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             effect.render();
-            requestAnimationFrame(animate);
-            // console.log("animating");
-        }
-        animate();
-        window.addEventListener("resize", function () {
-            canvas.width = this.window.innerWidth;
-            canvas.height = this.window.innerHeight;
+            animationFrameId = requestAnimationFrame(animate);
+        });
+
+        const resizeHandler = function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
             effect.resize(canvas.width, canvas.height);
             effect.wrapText(inputValue);
-        });
+        };
+        window.addEventListener("resize", resizeHandler);
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener("resize", resizeHandler);
+        };
     }, [inputValue]);
 
     return (
