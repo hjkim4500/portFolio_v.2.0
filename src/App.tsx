@@ -30,6 +30,9 @@ const Section = styled.div`
         width: 150px;
         position: absolute;
     }
+    svg {
+        position: absolute;
+    }
 `;
 const ParallaxProgress = styled.progress`
     position: fixed;
@@ -79,18 +82,29 @@ function App() {
     useGSAP(() => {
         const path = pathRef.current!;
         const ufoElement = ufoElementRef.current!;
-        if (path !== null && ufoElement !== null) {
-            gsap.to(ufoElement, {
-                duration: 5,
-                motionPath: {
-                    path: path,
-                    align: path,
-                    autoRotate: true,
-                    alignOrigin: [0.5, 0.5],
-                },
-                ease: "power1.inOut",
-            });
-        }
+
+        gsap.set(ufoElement, { visibility: "hidden" });
+        gsap.to(ufoElement, {
+            scrollTrigger: {
+                trigger: ".section3",
+                scrub: 3,
+                end: "+=3000",
+                onEnter: () => gsap.set(ufoElement, { visibility: "visible" }),
+                onLeave: () => gsap.set(ufoElement, { visibility: "hidden" }),
+                onEnterBack: () =>
+                    gsap.set(ufoElement, { visibility: "visible" }),
+                onLeaveBack: () =>
+                    gsap.set(ufoElement, { visibility: "hidden" }),
+            },
+            motionPath: {
+                path: path,
+                align: path,
+                autoRotate: false, // 우주선이 뒤집혀지지 않게 설정
+                alignOrigin: [0.5, 0.5],
+            },
+
+            ease: "power1.inOut",
+        });
     });
     useGSAP(() => {
         const panel = section_1Ref.current!;
@@ -132,13 +146,18 @@ function App() {
             </Section>
             <Section className="section2">
                 <StarsParticle />
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1920 1080"
+                    preserveAspectRatio="xMidYMid meet"
+                    style={{ width: "100%", height: "100%" }}
+                >
                     <path
                         ref={pathRef}
-                        id="sPath"
                         fill="none"
-                        stroke="red"
-                        d="M10,180 Q100,10 190,180"
+                        stroke="none"
+                        d="M384.5-47.5c0,0-308,144-312,216s434,25,436,76s-421,147-426,219s1757,187,1767,331s-1620,83-1690,197
+        c-48.51,78.99,148,158,148,158"
                     />
                 </svg>
                 <img
