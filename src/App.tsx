@@ -135,7 +135,7 @@ function App() {
             end: "+=3000",
             scrub: true,
             pin: true,
-            markers: true,
+            markers: false,
             anticipatePin: 1,
         });
     });
@@ -160,11 +160,7 @@ function App() {
         c-48.51,78.99,148,158,148,158"
                     />
                 </svg>
-                <img
-                    ref={ufoElementRef}
-                    src="../assets/img/UFO.png"
-                    alt="UFO"
-                />
+                <img ref={ufoElementRef} src={"assets/img/UFO.png"} alt="UFO" />
                 <div className="text t1">HELLO!</div>
                 <div className="text t2">I'M FRONTEND</div>
                 <div className="text t3">DEVELOPER!</div>
