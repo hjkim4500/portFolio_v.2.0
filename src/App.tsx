@@ -108,7 +108,7 @@ function App() {
     });
     useGSAP(() => {
         const panel = section_1Ref.current!;
-        console.log(1111111);
+        console.log(222);
         ScrollTrigger.create({
             trigger: panel,
             start: "top top",
@@ -162,7 +162,10 @@ function App() {
                 </svg>
                 <img
                     ref={ufoElementRef}
-                    src={"./assets/img/UFO.png"}
+                    src={
+                        "https://hjkim4500.github.io/portFolio_v.2.0/assets/img/UFO.png"
+                    }
+                    // src={"./assets/img/UFO.png"}
                     alt="UFO"
                 />
                 <div className="text t1">HELLO!</div>
