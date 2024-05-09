@@ -33,6 +33,12 @@ const Section = styled.div`
     svg {
         position: absolute;
     }
+    &.section3 {
+        .text {
+            color: #02dbc6;
+            font-size: 5vh;
+        }
+    }
 `;
 const ParallaxProgress = styled.progress`
     position: fixed;
@@ -77,6 +83,7 @@ const ParallaxProgress = styled.progress`
 `;
 function App() {
     const section_1Ref = useRef<HTMLDivElement>(null); // DOM 요소에 접근하기 위한 ref 생성
+    const section_3Ref = useRef<HTMLDivElement>(null); // DOM 요소에 접근하기 위한 ref 생성
     const ufoElementRef = useRef<HTMLImageElement>(null);
     const pathRef = useRef<SVGPathElement>(null);
     useGSAP(() => {
@@ -107,27 +114,40 @@ function App() {
         });
     });
     useGSAP(() => {
-        const panel = section_1Ref.current!;
-        console.log(222);
+        const section1 = section_1Ref.current!;
+        const section3 = section_3Ref.current!;
+
+        console.log(1111111);
         ScrollTrigger.create({
-            trigger: panel,
+            trigger: section1,
             start: "top top",
             pin: true,
             pinSpacing: false,
         });
+
         gsap.to("progress", {
             value: 100,
             ease: "none",
             scrollTrigger: { scrub: 0.3 },
         });
-        const Sec2 = gsap.timeline();
+
+        const Sec2 = gsap.timeline({
+            // onComplete: () => {
+            // ScrollTrigger.create({
+            //     trigger: section3,
+            //     start: "top top",
+            //     pin: true,
+            //     pinSpacing: false,
+            // });
+            // },
+        });
         Sec2.from(".section2 .t1", { autoAlpha: 0, duration: 1, y: 30 }, "+=1")
             .to(".section2 .t1", { autoAlpha: 0, duration: 0.25 }, "+=1")
             .from(".section2 .t2", { autoAlpha: 0, duration: 1, y: 30 }, "+=1")
             .to(".section2 .t2", { autoAlpha: 0, duration: 0.25 }, "+=1")
             .from(".section2 .t3", { autoAlpha: 0, duration: 1, y: 30 }, "+=1")
-            .to(".section2 .t3", { scale: 60, duration: 2, autoAlpha: 3 })
-            .to(".section2 .t3", { autoAlpha: 0, duration: 0.5 });
+            .to(".section2 .t3", { scale: 60, duration: 2, autoAlpha: 3 });
+
         ScrollTrigger.create({
             animation: Sec2,
             trigger: ".section2",
@@ -137,6 +157,19 @@ function App() {
             pin: true,
             markers: false,
             anticipatePin: 1,
+            onLeave: () => {
+                ScrollTrigger.create({
+                    trigger: section3,
+                    start: "top top",
+                    pin: true,
+                    pinSpacing: false,
+                });
+                gsap.to(".section3", { transform: "translate(0px, 0px)" });
+            },
+            onEnterBack: () => {
+                console.log("onEnterBack");
+                gsap.to(".section3", { transform: "translate(0px, 0px)" });
+            },
         });
     });
     return (
@@ -162,17 +195,18 @@ function App() {
                 </svg>
                 <img
                     ref={ufoElementRef}
-                    src={
-                        "https://hjkim4500.github.io/portFolio_v.2.0/assets/img/UFO.png"
-                    }
-                    // src={"./assets/img/UFO.png"}
+                    // src={'https://hjkim4500.github.io/portFolio_v.2.0/assets/img/UFO.png'}
+                    src={"./assets/img/UFO.png"}
                     alt="UFO"
                 />
                 <div className="text t1">HELLO!</div>
                 <div className="text t2">I'M FRONTEND</div>
                 <div className="text t3">DEVELOPER!</div>
             </Section>
-            <Section className="section3"></Section>
+            <Section className="section3 " ref={section_3Ref}>
+                <div className="text t1">안녕하세요 저는 </div>
+                <div>안녕하세요 저는 다양한 </div>
+            </Section>
             <Section></Section>
             <Section></Section>
             <Section></Section>

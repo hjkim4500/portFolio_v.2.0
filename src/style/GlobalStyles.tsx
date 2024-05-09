@@ -7,7 +7,7 @@ ${reset}
 	font-family: 'OrbitronBlack';
 	font-style: normal;
 	font-weight: bold;
-	src: url('./assets/font/OrbitronBlack.ttf') format('truetype');
+	src: url('assets/font/OrbitronBlack.ttf') format('truetype');
 
 }
 @font-face {
