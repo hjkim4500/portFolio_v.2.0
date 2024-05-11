@@ -19,14 +19,15 @@ const Section = styled.div`
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        font-size: 10vh;
+        font-size: 10vw;
+        .text {
+            transform: translateY(0px); /* 시작 위치를 아래로 조정합니다. */
+            position: absolute;
+            color: #02dbc6;
+            font-family: "OrbitronBlack", sans-serif;
+        }
     }
-    .text {
-        transform: translateY(0px); /* 시작 위치를 아래로 조정합니다. */
-        position: absolute;
-        color: #02dbc6;
-        font-family: "OrbitronBlack", sans-serif;
-    }
+
     img {
         width: 150px;
         position: absolute;
@@ -39,10 +40,30 @@ const Section = styled.div`
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        .text {
+        .textBox {
+            line-height: 1.15;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: "OrbitronBlack", sans-serif;
             color: #02dbc6;
-            font-size: 5vh;
+            font-size: 3vw;
+            div {
+                height: 4vw;
+                p {
+                    overflow: hidden;
+                    height: 100%;
+                    strong {
+                        font-weight: bolder;
+                    }
+                }
+            }
         }
+    }
+    &.section4 {
+        background-color: #000000;
     }
 `;
 const ParallaxProgress = styled.progress`
@@ -91,7 +112,7 @@ function App() {
     const section_3Ref = useRef<HTMLDivElement>(null); // DOM 요소에 접근하기 위한 ref 생성
     const ufoElementRef = useRef<HTMLImageElement>(null);
     const pathRef = useRef<SVGPathElement>(null);
-    const [startAnimation, setStartAnimation] = useState(false);
+    // const [startAnimation, setStartAnimation] = useState(false);
     useGSAP(() => {
         const path = pathRef.current!;
         const ufoElement = ufoElementRef.current!;
@@ -121,7 +142,6 @@ function App() {
     });
     useGSAP(() => {
         const section1 = section_1Ref.current!;
-        const section3 = section_3Ref.current!;
 
         ScrollTrigger.create({
             trigger: section1,
@@ -152,7 +172,7 @@ function App() {
             .to(".section2 .t2", { autoAlpha: 0, duration: 0.25 }, "+=1")
             .from(".section2 .t3", { autoAlpha: 0, duration: 1, y: 30 }, "+=1")
             .to(".section2 .t3", { scale: 60, duration: 2, autoAlpha: 3 })
-            .to(".section2 .t3", { visibility: "hidden" });
+            .to(".section2 .t3", { display: "none" });
         ScrollTrigger.create({
             animation: Sec2,
             trigger: ".section2",
@@ -176,18 +196,68 @@ function App() {
             //     console.log("onEnterBack");
             // },
         });
-        gsap.to(section3, {
-            scrollTrigger: {
-                trigger: section3,
-                start: "top center",
-                scrub: true,
-                onEnter: () => setStartAnimation(true),
-                onLeaveBack: () => setStartAnimation(false),
-            },
+    });
+    useGSAP(() => {
+        const Sec3 = gsap.timeline();
+        Sec3.from(
+            ".section3 .textBox p",
+            { duration: 1, height: 0, y: 50 },
+            "+=0.5"
+        )
+            .to(
+                ".section3 .textBox p",
+                { duration: 0.25, height: "auto", y: 0 },
+                "+=0.5"
+            )
+            .to(
+                ".section3 .textBox p span",
+                { duration: 0.25, opacity: 0 },
+                "+=0.5"
+            )
+            .to(".section3 .textBox ", { duration: 0.25, x: "-30%" }, "+=0.5")
+
+            .to(
+                ".section3 .textBox .one",
+                { duration: 0.2, x: "-20%" },
+                "-=0.2"
+            )
+            .to(
+                ".section3 .textBox .two",
+                { duration: 0.2, x: "-10%" },
+                "-=0.2"
+            )
+            .to(
+                ".section3 .textBox .three",
+                { duration: 0.2, x: "-17%" },
+                "-=0.2"
+            )
+            .to(".section3 .textBox .one strong", {
+                duration: 0.2,
+                borderBottom: "2px solid #02dbc6",
+                display: "inline-block",
+            })
+            .to(
+                [".section3 .textBox .two", ".section3 .textBox .three"],
+                { duration: 0.2, opacity: 0.5 },
+                "-=0.2"
+            );
+
+        ScrollTrigger.create({
+            animation: Sec3,
+            trigger: ".section3",
+            start: "top top",
+            endTrigger: ".section4",
+            end: "+=5000",
+            scrub: true,
+            pin: true,
+            markers: false,
+            anticipatePin: 1,
         });
     });
+
     return (
         <div className="App">
+            <ParallaxProgress value="0" max="100" />
             <Section ref={section_1Ref}>
                 <TextParticle />
             </Section>
@@ -218,7 +288,7 @@ function App() {
                 <div className="text t3">DEVELOPER!</div>
             </Section>
             <Section className="section3 " ref={section_3Ref}>
-                {startAnimation && (
+                {/* {startAnimation && (
                     <TypeIt
                         className="text"
                         getBeforeInit={(instance) => {
@@ -232,13 +302,40 @@ function App() {
                             return instance;
                         }}
                     />
-                )}
-                <div>안녕하세요 저는 다양한 </div>
+                )} */}
+                <div className="textBox">
+                    <div>
+                        <p className="one">
+                            <strong>꾸준한 노력</strong>
+                            <span>과</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p className="two">
+                            <strong>다양한 기술</strong>
+                            <span>들로</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p className="three">
+                            <span>발전하는&nbsp;</span>
+                            <strong>개발자</strong>
+                            <span>가 되고 싶은</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <span>김현준입니다.</span>
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <img src={"./assets/img/picture1.jpg"} alt="developer" />
+                </div>
             </Section>
+            <Section className="section4"></Section>
             <Section></Section>
             <Section></Section>
-            <Section></Section>
-            <ParallaxProgress value="0" max="100" />
         </div>
     );
 }

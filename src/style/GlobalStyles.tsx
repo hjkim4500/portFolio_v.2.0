@@ -21,7 +21,9 @@ ${reset}
 * {
 	box-sizing: border-box;
 }
-    
+html{
+	overflow-y: scroll;
+}
 body {
 	overflow-x: hidden;
 	font-family: apple-system, 'Open Sans', sans-serif;
