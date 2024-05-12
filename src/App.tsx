@@ -231,6 +231,7 @@ function App() {
                 { duration: 0.2, x: "-17%" },
                 "-=0.2"
             )
+            .to(".section3 .textBox", { duration: 0.2, y: "-70%" }, "+=0.2")
             .to(".section3 .textBox .one strong", {
                 duration: 0.2,
                 borderBottom: "2px solid #02dbc6",
@@ -240,7 +241,12 @@ function App() {
                 [".section3 .textBox .two", ".section3 .textBox .three"],
                 { duration: 0.2, opacity: 0.5 },
                 "-=0.2"
-            );
+            )
+            .from(".section3 .ImgWrap", {
+                duration: 1,
+                y: "-100%",
+                opacity: 0,
+            });
 
         ScrollTrigger.create({
             animation: Sec3,
@@ -329,7 +335,7 @@ function App() {
                         </p>
                     </div>
                 </div>
-                <div>
+                <div className="ImgWrap">
                     <img src={"./assets/img/picture1.jpg"} alt="developer" />
                 </div>
             </Section>
