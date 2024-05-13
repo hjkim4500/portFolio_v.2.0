@@ -7,6 +7,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import StarsParticle from "./Component/StarsParticle";
+
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const Section = styled.div`
@@ -26,12 +27,12 @@ const Section = styled.div`
             color: #02dbc6;
             font-family: "OrbitronBlack", sans-serif;
         }
+        img {
+            width: 150px;
+            position: absolute;
+        }
     }
 
-    img {
-        width: 150px;
-        position: absolute;
-    }
     svg {
         position: absolute;
     }
@@ -50,16 +51,67 @@ const Section = styled.div`
             font-family: "OrbitronBlack", sans-serif;
             color: #02dbc6;
             font-size: 3vw;
-            div {
+            z-index: 50;
+            .textWrap {
                 height: 4vw;
-                p {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                div {
                     overflow: hidden;
                     height: 100%;
-                    strong {
+                    display: flex;
+
+                    span {
+                        white-space: nowrap;
+                    }
+                    p {
+                        width: 100%;
+
                         font-weight: bolder;
                     }
                 }
             }
+        }
+        .ImgWrap {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 10px;
+            opacity: 0;
+
+            img {
+                max-width: initial;
+                width: 200%;
+                margin-bottom: 50%;
+            }
+        }
+        .EffortText {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+            color: white;
+            line-height: 1.3;
+            font-size: 1.5vw;
+            p {
+                text-align: left;
+            }
+
+            a {
+                font-family: "OrbitronBlack", sans-serif;
+                text-align: right;
+                color: #02dbc6;
+            }
+        }
+        .HorizontalScroll {
+            overscroll-behavior: none;
+            width: 900%;
+            height: 100vh;
+            display: flex;
+            flex-wrap: nowrap;
         }
     }
     &.section4 {
@@ -200,60 +252,153 @@ function App() {
     useGSAP(() => {
         const Sec3 = gsap.timeline();
         Sec3.from(
-            ".section3 .textBox p",
+            ".section3 .textBox .textWrap div",
             { duration: 1, height: 0, y: 50 },
-            "+=0.5"
+            "-=0.5"
         )
             .to(
-                ".section3 .textBox p",
+                ".section3 .textBox .textWrap div",
                 { duration: 0.25, height: "auto", y: 0 },
-                "+=0.5"
+                "+=0.2"
             )
             .to(
-                ".section3 .textBox p span",
+                ".section3 .textBox .textWrap div span",
                 { duration: 0.25, opacity: 0 },
-                "+=0.5"
+                "-=0.3"
             )
-            .to(".section3 .textBox ", { duration: 0.25, x: "-30%" }, "+=0.5")
+            .to(".section3 .textBox ", { duration: 0.25, x: "-30%" }, "+=0.3")
 
             .to(
-                ".section3 .textBox .one",
-                { duration: 0.2, x: "-20%" },
+                ".section3 .textBox .one ",
+                { duration: 0.2, x: "-7%" },
+                "-=0.4"
+            )
+            .to(".section3 .textBox .two ", { duration: 0.2 }, "-=0.4")
+            .to(
+                ".section3 .textBox .three ",
+                { duration: 0.2, x: "-11%" },
+                "-=0.4"
+            )
+            .to(".section3 .textBox", { duration: 0.2, y: "-70%" }, "+=0.1")
+            .to(
+                ".section3 .textBox .textWrap .one p",
+                {
+                    duration: 0.2,
+                    borderBottomColor: "#02dbc6",
+                    borderBottomWidth: "2px",
+                    borderBottomStyle: "solid",
+                    opacity: 1,
+                    // display: "inline-block",
+                },
                 "-=0.2"
             )
             .to(
-                ".section3 .textBox .two",
-                { duration: 0.2, x: "-10%" },
+                [
+                    ".section3 .textBox .textWrap .two p",
+                    ".section3 .textBox .textWrap .three p",
+                ],
+                {
+                    duration: 0.2,
+                    opacity: 0.5,
+                    borderBottomColor: "#02dbc6",
+                    borderBottomWidth: "0px",
+                    borderBottomStyle: "solid",
+                },
+                "-=0.2"
+            )
+            .from(
+                ".section3 .ImgWrap ",
+                {
+                    duration: 1,
+                    y: "200%",
+                    opacity: 1,
+                    maxWidth: "20%",
+                    maxHeight: "20%",
+                    bottom: "20%",
+                },
+                "-=0.3"
+            )
+            .to(
+                ".section3 .ImgWrap",
+                {
+                    duration: 1,
+                    y: "0%",
+                    opacity: 1,
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    bottom: "0%",
+                    fillOpacity: 1,
+                },
                 "-=0.2"
             )
             .to(
-                ".section3 .textBox .three",
-                { duration: 0.2, x: "-17%" },
+                ".section3 .ImgWrap img",
+                {
+                    width: "100%",
+                    marginBottom: "0%",
+                },
                 "-=0.2"
             )
-            .to(".section3 .textBox", { duration: 0.2, y: "-70%" }, "+=0.2")
-            .to(".section3 .textBox .one strong", {
-                duration: 0.2,
-                borderBottom: "2px solid #02dbc6",
-                display: "inline-block",
-            })
+            .from(
+                ".section3 .EffortText",
+                { duration: 1, opacity: 0, y: "100%" },
+                "-=0.2"
+            )
             .to(
-                [".section3 .textBox .two", ".section3 .textBox .three"],
-                { duration: 0.2, opacity: 0.5 },
-                "-=0.2"
+                ".section3 .ImgWrap",
+                { duration: 1, width: "20%", y: "-100%", bottom: "100%" },
+                "+=0.1"
             )
-            .from(".section3 .ImgWrap", {
-                duration: 1,
-                y: "-100%",
-                opacity: 0,
-            });
+            .to(
+                ".section3 .EffortText",
+                {
+                    opacity: 0,
+                    y: "100%",
+                },
+                "-=1"
+            )
+            .to(
+                ".section3 .textBox .textWrap .two p",
+                {
+                    duration: 0.2,
+                    borderBottomColor: "#02dbc6",
+                    borderBottomWidth: "2px",
+                    borderBottomStyle: "solid",
+                    opacity: 1,
+                    // display: "inline-block",
+                },
+                "-=1"
+            )
+            .to(
+                [
+                    ".section3 .textBox .textWrap .one p",
+                    ".section3 .textBox .textWrap .three p",
+                ],
+                {
+                    duration: 0.2,
+                    opacity: 0.5,
+                    borderBottomColor: "#02dbc6",
+                    borderBottomWidth: "0px",
+                    borderBottomStyle: "solid",
+                },
+                "-=1"
+            )
+            .to(
+                ".section3 .textBox",
+                {
+                    duration: 1,
+                    y: "-100%",
+                    opacity: 0,
+                },
+                "-=1"
+            );
 
         ScrollTrigger.create({
             animation: Sec3,
             trigger: ".section3",
             start: "top top",
             endTrigger: ".section4",
-            end: "+=5000",
+            end: "+=6000",
             scrub: true,
             pin: true,
             markers: false,
@@ -310,33 +455,51 @@ function App() {
                     />
                 )} */}
                 <div className="textBox">
-                    <div>
-                        <p className="one">
-                            <strong>꾸준한 노력</strong>
+                    <div className="textWrap">
+                        <div className="one">
+                            <p>꾸준한 노력</p>
                             <span>과</span>
-                        </p>
+                        </div>
                     </div>
-                    <div>
-                        <p className="two">
-                            <strong>다양한 기술</strong>
+                    <div className="textWrap">
+                        <div className="two">
+                            <p>다양한 기술</p>
                             <span>들로</span>
-                        </p>
+                        </div>
                     </div>
-                    <div>
-                        <p className="three">
+                    <div className="textWrap">
+                        <div className="three">
                             <span>발전하는&nbsp;</span>
-                            <strong>개발자</strong>
+                            <p>개발자</p>
                             <span>가 되고 싶은</span>
-                        </p>
+                        </div>
                     </div>
-                    <div>
-                        <p>
+                    <div className="textWrap">
+                        <div>
                             <span>김현준입니다.</span>
-                        </p>
+                        </div>
                     </div>
                 </div>
                 <div className="ImgWrap">
                     <img src={"./assets/img/picture1.jpg"} alt="developer" />
+                </div>
+                <div className="EffortText">
+                    <p>
+                        공부한 부분을{" "}
+                        <span>
+                            {" "}
+                            <a href="https://github.com/hjkim4500">Github</a>
+                        </span>
+                        에 매일 업로드하기 목표를 두고
+                        <br />
+                        꾸준히 노력하고 있습니다.
+                    </p>
+                </div>
+                <div className="HorizontalScroll">
+                    <div className="fixedThing">
+                        <h2>Used Stack</h2>
+                        <p>이 기술들을 사용해 봤어요!</p>
+                    </div>
                 </div>
             </Section>
             <Section className="section4"></Section>
