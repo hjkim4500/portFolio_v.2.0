@@ -107,11 +107,60 @@ const Section = styled.div`
             }
         }
         .HorizontalScroll {
-            overscroll-behavior: none;
-            width: 900%;
-            height: 100vh;
             display: flex;
-            flex-wrap: nowrap;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            position: absolute;
+            .fixedThing {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 2vw;
+                font-family: "OrbitronBlack", sans-serif;
+                text-align: center;
+                h2 {
+                    color: #02dbc6;
+                    font-size: 3vw;
+                    margin-bottom: 20px;
+                }
+            }
+            .Stack {
+                width: 400px;
+                height: 70%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                box-shadow: 0 0 2vw rgba(0, 255, 255, 0.5),
+                    0 0 1vw rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                transform-style: preserve-3d;
+                position: relative;
+                opacity: 0;
+                z-index: 1;
+                .front {
+                    padding: 5%;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-color: white;
+                    border-radius: 10px;
+                    transform: translateZ(35px);
+                    backface-visibility: hidden;
+                }
+                .back {
+                    padding: 5%;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-color: black;
+                    border-radius: 10px;
+                    transform: translateZ(-35px) rotateY(180deg);
+                    backface-visibility: hidden;
+                }
+            }
         }
     }
     &.section4 {
@@ -383,15 +432,15 @@ function App() {
                 },
                 "-=1"
             )
-            .to(
-                ".section3 .textBox",
-                {
-                    duration: 1,
-                    y: "-100%",
-                    opacity: 0,
-                },
+
+            .from(
+                ".section3 .HorizontalScroll",
+                { duration: 1, y: "100%", width: "20%" },
                 "-=1"
-            );
+            )
+            .from(".section3 .Stack", { duration: 1, opacity: 0 }, "+=0.1")
+            .to(".section3 .Stack", { duration: 1, opacity: 1 }, "+=0.1")
+            .to(".Stack", { duration: 1, rotationY: 180 }, "+=0.1");
 
         ScrollTrigger.create({
             animation: Sec3,
@@ -500,6 +549,12 @@ function App() {
                         <h2>Used Stack</h2>
                         <p>이 기술들을 사용해 봤어요!</p>
                     </div>
+                    <div className="Stack ">
+                        <div className="front">Front!!!!</div>
+                        <div className="back"> BACK!!!</div>
+                    </div>
+                    {/* <div className="Stack ReactStack"></div>
+                    <div className="Stack StudyingNow"></div> */}
                 </div>
             </Section>
             <Section className="section4"></Section>
