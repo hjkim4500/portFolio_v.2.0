@@ -129,7 +129,7 @@ const Section = styled.div`
             }
             .Stack {
                 width: 400px;
-                height: 70%;
+                height: 75%;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
@@ -145,10 +145,53 @@ const Section = styled.div`
                     position: absolute;
                     width: 100%;
                     height: 100%;
-                    background-color: white;
+                    background-color: black;
                     border-radius: 10px;
                     transform: translateZ(35px);
                     backface-visibility: hidden;
+                    .Header {
+                        h2 {
+                            font-family: "OrbitronBlack", sans-serif;
+                            color: #02dbc6;
+                            font-size: 25px;
+                            margin-bottom: 15px;
+                        }
+                    }
+                    .thingsWrap {
+                        padding: 5px;
+                        margin-bottom: 15px;
+                        border-radius: 5px;
+                        .Wrap {
+                            display: flex;
+                            justify-content: start;
+                            align-items: center;
+                            margin-bottom: 15px;
+
+                            img {
+                                margin-right: 20px;
+                                width: 20%;
+                            }
+                            p {
+                                font-size: 15px;
+                                font-family: "OrbitronBlack", sans-serif;
+                                color: white;
+                            }
+                        }
+                        //progressbar 디자인 해줘
+                        .progressBar {
+                            width: 100%;
+                            height: 10px;
+                            background-color: white;
+                            border-radius: 10px;
+                            margin-top: 10px;
+                            .progressBarInner {
+                                width: 20%;
+                                height: 100%;
+                                background-color: #02dbc6;
+                                border-radius: 10px;
+                            }
+                        }
+                    }
                 }
                 .back {
                     padding: 5%;
@@ -550,8 +593,89 @@ function App() {
                         <p>이 기술들을 사용해 봤어요!</p>
                     </div>
                     <div className="Stack ">
-                        <div className="front">Front!!!!</div>
-                        <div className="back"> BACK!!!</div>
+                        <div className="front">
+                            <div className="Header">
+                                <h2>Using Stack</h2>
+                            </div>
+                            <div className="HTML thingsWrap">
+                                <div className="Wrap">
+                                    <img
+                                        src={"./assets/img/icon_HTML.png"}
+                                        alt="HTML"
+                                    />
+                                    <p>
+                                        HTML 태그 왠만한 태그 부분은 다 알고
+                                        있으며, 누구보다 빠르게 태그 배치를 할
+                                        수 있습니다.
+                                    </p>
+                                </div>
+                                <div>
+                                    <div className="progressBar">
+                                        <div className="progressBarInner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="CSS thingsWrap">
+                                <div className="Wrap">
+                                    <img
+                                        src={"./assets/img/icon_CSS.png"}
+                                        alt="CSS"
+                                    />
+                                    <p>
+                                        CSS는 기본적인 스타일링을 할 수 있으며,
+                                        SCSS를 사용해 변수, mixin, 함수 등을
+                                        사용할 수 있으며, 반응형을 구현할 수
+                                        있습니다.
+                                    </p>
+                                </div>
+                                <div>
+                                    <div className="progressBar">
+                                        <div className="progressBarInner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="JavaScript thingsWrap">
+                                <div className="Wrap">
+                                    <img
+                                        src={"./assets/img/icon_JS.png"}
+                                        alt="CSS"
+                                    />
+                                    <p>
+                                        CSS는 기본적인 스타일링을 할 수 있으며,
+                                        SCSS를 사용해 변수, mixin, 함수 등을
+                                        사용할 수 있으며, 반응형을 구현할 수
+                                        있습니다.
+                                    </p>
+                                </div>
+                                <div>
+                                    <div className="progressBar">
+                                        <div className="progressBarInner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="Typescript thingsWrap">
+                                <div className="Wrap">
+                                    <img
+                                        src={"./assets/img/icon_Typescript.png"}
+                                        alt="CSS"
+                                    />
+                                    <p>
+                                        CSS는 기본적인 스타일링을 할 수 있으며,
+                                        SCSS를 사용해 변수, mixin, 함수 등을
+                                        사용할 수 있으며, 반응형을 구현할 수
+                                        있습니다.
+                                    </p>
+                                </div>
+                                <div>
+                                    <div className="progressBar">
+                                        <div className="progressBarInner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="back">
+                            <div className="React"></div>
+                        </div>
                     </div>
                     {/* <div className="Stack ReactStack"></div>
                     <div className="Stack StudyingNow"></div> */}
