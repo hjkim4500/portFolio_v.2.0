@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import TypeIt from "typeit-react";
 import TextParticle from "./Component/TextParticle";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
@@ -10,6 +10,62 @@ import StarsParticle from "./Component/StarsParticle";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
+const commonStyles = css`
+    padding: 5%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    .Header {
+        h2 {
+            font-family: "OrbitronBlack", sans-serif;
+            color: #02dbc6;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+    }
+
+    .thingsWrap {
+        padding: 5px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+
+        .Wrap {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            margin-bottom: 15px;
+
+            img {
+                margin-right: 20px;
+                width: 20%;
+            }
+
+            p {
+                font-size: 15px;
+                font-family: "OrbitronBlack", sans-serif;
+                color: white;
+            }
+        }
+
+        .progressBar {
+            width: 100%;
+            height: 10px;
+            background-color: white;
+            border-radius: 10px;
+            margin-top: 10px;
+
+            .progressBarInner {
+                width: 0%;
+                height: 100%;
+                background-color: #02dbc6;
+                border-radius: 10px;
+            }
+        }
+    }
+`;
 const Section = styled.div`
     width: 100%;
     height: 100vh;
@@ -141,69 +197,45 @@ const Section = styled.div`
                 opacity: 0;
                 z-index: 1;
                 .front {
-                    padding: 5%;
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    background-color: black;
-                    border-radius: 10px;
+                    ${commonStyles}
                     transform: translateZ(35px);
-                    backface-visibility: hidden;
-                    .Header {
-                        h2 {
-                            font-family: "OrbitronBlack", sans-serif;
-                            color: #02dbc6;
-                            font-size: 25px;
-                            margin-bottom: 15px;
-                        }
-                    }
-                    .thingsWrap {
-                        padding: 5px;
-                        margin-bottom: 15px;
-                        border-radius: 5px;
-                        .Wrap {
-                            display: flex;
-                            justify-content: start;
-                            align-items: center;
-                            margin-bottom: 15px;
-
-                            img {
-                                margin-right: 20px;
-                                width: 20%;
-                            }
-                            p {
-                                font-size: 15px;
-                                font-family: "OrbitronBlack", sans-serif;
-                                color: white;
-                            }
-                        }
-                        //progressbar 디자인 해줘
-                        .progressBar {
-                            width: 100%;
-                            height: 10px;
-                            background-color: white;
-                            border-radius: 10px;
-                            margin-top: 10px;
-                            .progressBarInner {
-                                width: 20%;
-                                height: 100%;
-                                background-color: #02dbc6;
-                                border-radius: 10px;
-                            }
-                        }
-                    }
                 }
                 .back {
-                    padding: 5%;
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    background-color: black;
-                    border-radius: 10px;
+                    ${commonStyles}
                     transform: translateZ(-35px) rotateY(180deg);
-                    backface-visibility: hidden;
+                    .reactThing {
+                        padding: 5px;
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 10px;
+                        /* justify-content: space-around; */
+                        img {
+                            padding: 5px;
+                            width: 90px;
+                            /* height: 70px; */
+                        }
+                    }
+                    .studyThing {
+                        padding: 5px;
+                        display: flex;
+                        align-items: center;
+                        /* justify-content: center; */
+                        img {
+                            padding: 5px;
+                            width: 130px;
+                            /* height: 70px; */
+                        }
+                    }
                 }
             }
+        }
+        .developer {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+
+            position: absolute;
         }
     }
     &.section4 {
@@ -256,6 +288,7 @@ function App() {
     const section_3Ref = useRef<HTMLDivElement>(null); // DOM 요소에 접근하기 위한 ref 생성
     const ufoElementRef = useRef<HTMLImageElement>(null);
     const pathRef = useRef<SVGPathElement>(null);
+
     // const [startAnimation, setStartAnimation] = useState(false);
     useGSAP(() => {
         const path = pathRef.current!;
@@ -343,6 +376,7 @@ function App() {
     });
     useGSAP(() => {
         const Sec3 = gsap.timeline();
+        // gsap.set(Rocket, { visibility: "hidden" });
         Sec3.from(
             ".section3 .textBox .textWrap div",
             { duration: 1, height: 0, y: 50 },
@@ -438,7 +472,12 @@ function App() {
             )
             .to(
                 ".section3 .ImgWrap",
-                { duration: 1, width: "20%", y: "-100%", bottom: "100%" },
+                {
+                    duration: 1,
+                    width: "20%",
+                    y: "-100%",
+                    bottom: "100%",
+                },
                 "+=0.1"
             )
             .to(
@@ -483,14 +522,75 @@ function App() {
             )
             .from(".section3 .Stack", { duration: 1, opacity: 0 }, "+=0.1")
             .to(".section3 .Stack", { duration: 1, opacity: 1 }, "+=0.1")
-            .to(".Stack", { duration: 1, rotationY: 180 }, "+=0.1");
+            .to(
+                ".section3 .Stack .front .HTML .progressBar .progressBarInner",
+                { duration: 1, width: "95%" },
+                "+=0.1"
+            )
+            .to(
+                ".section3 .Stack .front .CSS .progressBar .progressBarInner",
+                { duration: 1, width: "90%" },
+                "+=0.1"
+            )
+            .to(
+                ".section3 .Stack .front .JavaScript .progressBar .progressBarInner",
+                { duration: 1, width: "75%" },
+                "+=0.1"
+            )
+            .to(
+                ".section3 .Stack .front .TypeScript .progressBar .progressBarInner",
+                { duration: 1, width: "45%" },
+                "+=0.1"
+            )
+            .to(".Stack", { duration: 1, rotationY: 180 }, "+=0.1")
+            .to(
+                ".section3 .Stack .back .React .progressBar .progressBarInner",
+                { duration: 1, width: "50%" },
+                "+=0.1"
+            )
+            .to(
+                ".section3 .textBox .textWrap .three p",
+                {
+                    duration: 0.2,
+                    borderBottomColor: "#02dbc6",
+                    borderBottomWidth: "2px",
+                    borderBottomStyle: "solid",
+                    opacity: 1,
+                    // display: "inline-block",
+                },
+                "+=0.1"
+            )
+            .to(
+                [
+                    ".section3 .textBox .textWrap .one p",
+                    ".section3 .textBox .textWrap .two p",
+                ],
+                {
+                    duration: 0.2,
+                    opacity: 0.5,
+                    borderBottomColor: "#02dbc6",
+                    borderBottomWidth: "0px",
+                    borderBottomStyle: "solid",
+                },
+                "-=0.1"
+            )
+            .to(
+                ".section3 .HorizontalScroll",
+                { duration: 1, width: "20%", y: "-100%", bottom: "100%" },
+                "-=0.1"
+            )
+            .from(
+                ".section3 .developer",
+                { duration: 1, y: "100%", width: "20%" },
+                "-=0.1"
+            );
 
         ScrollTrigger.create({
             animation: Sec3,
             trigger: ".section3",
             start: "top top",
             endTrigger: ".section4",
-            end: "+=6000",
+            end: "+=8000",
             scrub: true,
             pin: true,
             markers: false,
@@ -638,13 +738,12 @@ function App() {
                                 <div className="Wrap">
                                     <img
                                         src={"./assets/img/icon_JS.png"}
-                                        alt="CSS"
+                                        alt="JavaScript"
                                     />
                                     <p>
-                                        CSS는 기본적인 스타일링을 할 수 있으며,
-                                        SCSS를 사용해 변수, mixin, 함수 등을
-                                        사용할 수 있으며, 반응형을 구현할 수
-                                        있습니다.
+                                        JavaScript를 사용해 DOM 조작, 이벤트
+                                        처리, 비동기 처리 등을 할 수 있으며, ES6
+                                        문법을 사용해 코드를 작성할 수 있습니다.
                                     </p>
                                 </div>
                                 <div>
@@ -653,17 +752,17 @@ function App() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="Typescript thingsWrap">
+                            <div className="TypeScript thingsWrap">
                                 <div className="Wrap">
                                     <img
                                         src={"./assets/img/icon_Typescript.png"}
-                                        alt="CSS"
+                                        alt="Typescript"
                                     />
                                     <p>
-                                        CSS는 기본적인 스타일링을 할 수 있으며,
-                                        SCSS를 사용해 변수, mixin, 함수 등을
-                                        사용할 수 있으며, 반응형을 구현할 수
-                                        있습니다.
+                                        TypeScript를 사용해 타입을 정의하고
+                                        코드를 작성할 수 있으며, 인터페이스를
+                                        사용해 타입을 정의할 수 있습니다. 현재
+                                        더 공부중에 있습니다.
                                     </p>
                                 </div>
                                 <div>
@@ -674,12 +773,61 @@ function App() {
                             </div>
                         </div>
                         <div className="back">
-                            <div className="React"></div>
+                            <div className="Header">
+                                <h2>FrontEnd Stack</h2>
+                            </div>
+                            <div className="React thingsWrap">
+                                <div className="Wrap">
+                                    <img
+                                        src={"./assets/img/icon_React.png"}
+                                        alt="React"
+                                    />
+                                    <p>
+                                        React를 사용해 컴포넌트 기반의
+                                        프로그래밍을 할 수 있으며, Hook을 사용해
+                                        상태관리를 할 수 있습니다.
+                                    </p>
+                                </div>
+                                <div>
+                                    <div className="progressBar">
+                                        <div className="progressBarInner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="Header">
+                                <h2>Used Libraries</h2>
+                            </div>
+                            <div className="reactThing">
+                                <img
+                                    src="./assets/img/icon_recoil.png"
+                                    alt="recoil"
+                                />
+                                <img
+                                    src="./assets/img/icon_StyledComponent.png"
+                                    alt="styledcomponent"
+                                />
+                                <img
+                                    src="./assets/img/icon_ReactQuery.png"
+                                    alt="ReactQuery"
+                                />
+                                <img
+                                    src="./assets/img/icon_FramerMotion.png"
+                                    alt="FramerMotion"
+                                />
+                            </div>
+                            <div className="Header">
+                                <h2>Studying Libraries</h2>
+                            </div>
+                            <div className="studyThing">
+                                <img
+                                    src="./assets/img/icon_Nextjs.png"
+                                    alt="Nextjs"
+                                />
+                            </div>
                         </div>
                     </div>
-                    {/* <div className="Stack ReactStack"></div>
-                    <div className="Stack StudyingNow"></div> */}
                 </div>
+                <div className="developer"></div>
             </Section>
             <Section className="section4"></Section>
             <Section></Section>

@@ -50,9 +50,9 @@ function StarsParticle() {
                         x: Math.random() * this.width,
                         y: Math.random() * this.height,
                         size: Math.random() * 4 + 2,
-                        speed: Math.random() * 1 + 0.2,
+                        speed: Math.random() * 1 + 0.001,
                         opacity: Math.random(),
-                        opacityChangeSpeed: Math.random() * 0.02 + 0.00001, // 0.01 ~ 0.03
+                        opacityChangeSpeed: Math.random() * 0.02 + 0.001, // 0.01 ~ 0.03
                     });
                 }
             }
