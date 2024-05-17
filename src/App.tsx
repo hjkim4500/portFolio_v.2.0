@@ -9,7 +9,12 @@ import MotionPathPlugin from "gsap/MotionPathPlugin";
 import StarsParticle from "./Component/StarsParticle";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
-
+interface PlanetProps {
+    width: string;
+    height: string;
+    color1: string;
+    color2: string;
+}
 const commonStyles = css`
     padding: 5%;
     position: absolute;
@@ -236,10 +241,160 @@ const Section = styled.div`
             background-color: black;
 
             position: absolute;
+            .developFixedThing {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 2vw;
+                font-family: "OrbitronBlack", sans-serif;
+                text-align: center;
+                h2 {
+                    color: #02dbc6;
+                    font-size: 3vw;
+                    margin-bottom: 20px;
+                }
+            }
+            .developerWrap {
+                box-shadow: 0 0 2vw rgba(0, 255, 255, 0.5),
+                    0 0 1vw rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                width: 360px;
+
+                height: auto;
+                position: absolute;
+                /* top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%); */
+                background-color: black;
+                padding: 10px;
+                opacity: 0;
+                left: 100%;
+                &.first {
+                    top: 5%;
+                }
+                &.second {
+                    top: 50%;
+                }
+                z-index: 45;
+                .Header {
+                    display: flex;
+                    align-items: center;
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+                    border-bottom: 1px solid #02dbc6;
+
+                    h2 {
+                        font-family: "OrbitronBlack", sans-serif;
+                        color: #02dbc6;
+                        font-size: 25px;
+                        margin-right: 15px;
+                    }
+                    p {
+                        color: white;
+                        font-size: 15px;
+                    }
+                }
+                .Content {
+                    h2 {
+                        font-family: "OrbitronBlack", sans-serif;
+                        color: #02dbc6;
+                        font-size: 18px;
+                        margin-bottom: 15px;
+                    }
+                    p {
+                        line-height: 1.15;
+                        color: white;
+                        font-size: 16px;
+                        margin-bottom: 15px;
+                    }
+                }
+                .DoingThings {
+                    margin-bottom: 15px;
+                    h2 {
+                        font-family: "OrbitronBlack", sans-serif;
+                        color: #02dbc6;
+                        font-size: 18px;
+                        margin-bottom: 15px;
+                    }
+                    a {
+                        color: white;
+
+                        text-decoration: underline;
+                        font-size: 16px;
+                    }
+                    .imgThings {
+                        display: grid;
+                        justify-content: center;
+                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-rows: repeat(2, 1fr);
+                        gap: 10px; /* 필요에 따라 간격을 조정하세요 */
+                        img {
+                            min-width: 160px;
+                            width: 30%;
+                        }
+                    }
+                }
+            }
         }
     }
+
     &.section4 {
-        background-color: #000000;
+        .marQueeTrack {
+            overflow: hidden;
+            background-color: black;
+            position: relative;
+            height: 100%;
+            /* white-space: nowrap; */
+            .marqueeContainer {
+                height: 14vh;
+                font-size: 13vh;
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                /* display: inline-block; */
+                white-space: nowrap;
+                font-family: "OrbitronBlack", sans-serif;
+                /* transform: translate(-100%, 0px); */
+
+                &.l {
+                    transform: translate(-80%, 0px);
+                    color: white;
+                }
+                &.r {
+                    transform: translate(-100%, 0px);
+                    color: #02dbc6;
+                }
+            }
+        }
+    }
+`;
+const Planet = styled.div<PlanetProps>`
+    width: ${(props) => props.width}vw;
+    height: ${(props) => props.height}vw;
+    border-radius: 50%; /* 원형 모양을 만듭니다 */
+    position: absolute;
+    z-index: 30;
+    left: 100%;
+    background: radial-gradient(
+        circle at 10% 20%,
+        ${(props) => props.color1},
+        ${(props) => props.color2}
+    ); /* 그라디언트 배경을 설정합니다 */
+    opacity: 0;
+    &.P_one {
+        top: 20%;
+    }
+    &.P_two {
+        top: 60%;
+    }
+    &.P_three {
+        top: 33%;
+    }
+    &.P_four {
+        top: 70%;
     }
 `;
 const ParallaxProgress = styled.progress`
@@ -581,8 +736,28 @@ function App() {
             )
             .from(
                 ".section3 .developer",
-                { duration: 1, y: "100%", width: "20%" },
+                { duration: 1.5, y: "100%", width: "20%" },
                 "-=0.1"
+            )
+            .to(".section3 .developerWrap.first", { opacity: 1 }, "-=0.1")
+            .to(".section3 .developerWrap.second", { opacity: 1 }, "-=0.1")
+            .to(".section3 .P_one", { opacity: 1 }, "-=0.1")
+            .to(".section3 .P_two", { opacity: 1 }, "-=0.1")
+            .to(".section3 .P_three", { opacity: 1 }, "-=0.1")
+            .to(".section3 .P_four", { opacity: 1 }, "-=0.1")
+            .to(
+                ".section3 .developerWrap.first",
+                { duration: 0.7, x: "-550%" },
+                "-=0.3"
+            )
+            .to(".section3 .P_one", { duration: 0.8, x: "-1000%" }, "-=0.9")
+            .to(".section3 .P_two", { duration: 1.3, x: "-1000%" }, "-=0.7")
+            .to(".section3 .P_three", { duration: 1.2, x: "-1200%" }, "-=1")
+            .to(".section3 .P_four", { duration: 1.1, x: "-1200%" }, "-=1.1")
+            .to(
+                ".section3 .developerWrap.second",
+                { duration: 0.9, x: "-550%" },
+                "-=1.2"
             );
 
         ScrollTrigger.create({
@@ -598,6 +773,38 @@ function App() {
         });
     });
 
+    useGSAP(() => {
+        const Sec4 = gsap.timeline();
+        Sec4.to(".marqueeContainer.l ", {
+            x: "-200%",
+            ease: "linear",
+            repeat: -1,
+            // duration: 10,
+        }).to(".marqueeContainer.r", {
+            x: "200%",
+            ease: "linear",
+            repeat: -1,
+            // duration: 10,
+        });
+
+        ScrollTrigger.create({
+            animation: Sec4,
+            trigger: ".section4",
+            start: "top top",
+            end: "+=2000",
+            scrub: true,
+            anticipatePin: 1,
+        });
+    });
+
+    useGSAP(() => {
+        ScrollTrigger.create({
+            trigger: ".section4",
+            start: "bottom bottom",
+            pin: true,
+            pinSpacing: false,
+        });
+    });
     return (
         <div className="App">
             <ParallaxProgress value="0" max="100" />
@@ -827,10 +1034,133 @@ function App() {
                         </div>
                     </div>
                 </div>
-                <div className="developer"></div>
+                <div className="developer">
+                    <div className="developFixedThing">
+                        <h2>Developer History</h2>
+                        <p>이런 일을 했었어요!</p>
+                    </div>
+                    <div className="developerWrap first">
+                        <div className="Header">
+                            <h2>Design Comma</h2>
+                            <p>재직기간 : 1년 7개월</p>
+                        </div>
+                        <div className="Content">
+                            <h2>In Company</h2>
+                            <p>
+                                디자인 외주 업체로, 외주 웹페이지 제작을 주로
+                                했었으며, 원하는 로고 느낌을 통하여 로고를
+                                제작하는 자사 웹 사이트제작도 했습니다.
+                            </p>
+                            <p>
+                                디자인콤마에서는 프론트엔드 개발 및 퍼블리싱을
+                                담당했습니다. 프론트엔드 개발은 HTML, CSS,
+                                JavaScript를 사용해 작업을 하였습니다.
+                            </p>
+                        </div>
+                        <div className="DoingThings">
+                            <h2>Doing Things</h2>
+                            <div className="imgThings">
+                                <img src="./assets/img/Alob.png" alt="Alob" />
+                                <img
+                                    src="./assets/img/Design_Comma.png"
+                                    alt="Design_Comma"
+                                />
+                                <img
+                                    src="./assets/img/jhc_tour.png"
+                                    alt="jhc_tour"
+                                />
+                                <img src="./assets/img/mems.png" alt="mems" />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="developerWrap second">
+                        <div className="Header">
+                            <h2>CashCow</h2>
+                            <p>재직기간 : 1년 4개월</p>
+                        </div>
+                        <div className="Content">
+                            <h2>In Company</h2>
+                            <p>
+                                사람들에게 결제한 영수증 사진을 받아 포인트를
+                                적립해주는 플랫폼 앱 서비스 회사입니다.
+                            </p>
+                            <p>
+                                캐시카우내에서는 프론트엔드 개발을 담당했습니다.
+                                개발은 react,react-query, recoil,
+                                styled-component,react-virtualized,등 다양한
+                                라이브러리를 사용해 hybrid 앱 개발을 하였습니다.
+                            </p>
+                        </div>
+                        <div className="DoingThings">
+                            <h2>Doing Things</h2>
+                            <a href="https://hybrid.sweiver.co.kr/SweiverHome?cidx=0&os=1&osver=14&appver=8.0.4&isUserAdult=0&apiBaseUrl=https%3A%2F%2Fapi.cash-cow.co.kr%2Fv8.0%2F&is_session=1">
+                                캐시카우 앱 보러가기
+                            </a>
+                        </div>
+                    </div>
+                    <Planet
+                        className="P_one"
+                        width="12"
+                        height="12"
+                        color1="#BDE0FE"
+                        color2="#A2D2FF"
+                    />
+                    <Planet
+                        className="P_two"
+                        width="15"
+                        height="15"
+                        color1="#FFB347"
+                        color2="#FFCC5C"
+                    />
+                    <Planet
+                        className="P_three"
+                        width="10"
+                        height="10"
+                        color1="#02dbc6"
+                        color2="#A0C4FF"
+                    />
+                    <Planet
+                        className="P_four"
+                        width="9"
+                        height="9"
+                        color1="#02dbc6"
+                        color2="#FFC1CF"
+                    />
+                </div>
             </Section>
-            <Section className="section4"></Section>
-            <Section></Section>
+            <Section className="section4">
+                <div className="marQueeTrack">
+                    <div className="marqueeContainer r">
+                        Thanks for Watching My Portfolio! Thanks for Watching My
+                        Portfolio!
+                    </div>
+                    <div className="marqueeContainer l">
+                        Please Contact Me! Please Contact Me! Please Contact Me!
+                    </div>
+                    <div className="marqueeContainer r">
+                        Thanks for Watching My Portfolio! Thanks for Watching My
+                        Portfolio!
+                    </div>
+                    <div className="marqueeContainer l">
+                        Please Contact Me! Please Contact Me! Please Contact Me!
+                    </div>
+                    <div className="marqueeContainer r">
+                        Thanks for Watching My Portfolio! Thanks for Watching My
+                        Portfolio!
+                    </div>
+                    <div className="marqueeContainer l">
+                        Please Contact Me! Please Contact Me! Please Contact Me!
+                    </div>
+                    <div className="marqueeContainer r">
+                        Thanks for Watching My Portfolio! Thanks for Watching My
+                        Portfolio!
+                    </div>
+                    <div className="marqueeContainer l">
+                        Please Contact Me! Please Contact Me! Please Contact Me!
+                    </div>
+                </div>
+            </Section>
+            <Section className="section5"></Section>
             <Section></Section>
         </div>
     );
