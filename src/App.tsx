@@ -786,7 +786,7 @@ function App() {
             repeat: -1,
             // duration: 10,
         });
-
+        console.log("test");
         ScrollTrigger.create({
             animation: Sec4,
             trigger: ".section4",
