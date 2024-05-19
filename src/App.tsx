@@ -370,6 +370,22 @@ const Section = styled.div`
             }
         }
     }
+    &.section5 {
+        .Header {
+        }
+        .Content {
+            box-shadow: 0 0 2vw rgba(0, 255, 255, 0.5),
+                0 0 1vw rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            @media (max-width: 768px) {
+                flex-direction: column;
+            }
+        }
+    }
 `;
 const Planet = styled.div<PlanetProps>`
     width: ${(props) => props.width}vw;
@@ -786,7 +802,7 @@ function App() {
             repeat: -1,
             // duration: 10,
         });
-        console.log("test");
+
         ScrollTrigger.create({
             animation: Sec4,
             trigger: ".section4",
@@ -1160,7 +1176,32 @@ function App() {
                     </div>
                 </div>
             </Section>
-            <Section className="section5"></Section>
+            <Section className="section5">
+                <div className="Header">Contact Me</div>
+                <div className="Content">
+                    <div className="MyImg">
+                        <img src="./assets/img/MyImg.jpg" alt="MyImg" />
+                    </div>
+                    <div className="MyInfo">
+                        <div className="Email">
+                            <h2>Email</h2>
+                            <p>hjkim4500@naver.com</p>
+                        </div>
+                        <div className="Github">
+                            <h2>Github</h2>
+                            <p>https://github.com/hjkim4500</p>
+                        </div>
+                        <div className="Phone">
+                            <h2>Phone</h2>
+                            <p>010-4028-1161</p>
+                        </div>
+                        <div className="Codepen">
+                            <h2>Codepen</h2>
+                            <p>https://codepen.io/nxvsfrpj-the-looper</p>
+                        </div>
+                    </div>
+                </div>
+            </Section>
             <Section></Section>
         </div>
     );
