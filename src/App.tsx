@@ -878,7 +878,9 @@ function App() {
                 </svg>
                 <img
                     ref={ufoElementRef}
-                    src={"blob/master/public/UFO.PNG?raw=true"}
+                    src={
+                        "https://github.com/hjkim4500/portFolio_v.2.0/blob/master/public/UFO.PNG?raw=true"
+                    }
                     alt="UFO"
                 />
                 <div className="text t1">HELLO!</div>
@@ -928,7 +930,12 @@ function App() {
                     </div>
                 </div>
                 <div className="ImgWrap">
-                    <img src={"/picture1.jpg"} alt="developer" />
+                    <img
+                        src={
+                            "https://github.com/hjkim4500/portFolio_v.2.0/blob/master/public/picture1.jpg?raw=true"
+                        }
+                        alt="developer"
+                    />
                 </div>
                 <div className="EffortText">
                     <p>
