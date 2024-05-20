@@ -878,10 +878,10 @@ function App() {
                 </svg>
                 <img
                     ref={ufoElementRef}
-                    src={
-                        "https://hjkim4500.github.io/portFolio_v.2.0/assets/img/UFO.png"
-                    }
-                    // src={"./UFO.png"}
+                    // src={
+                    //     "https://hjkim4500.github.io/portFolio_v.2.0/assets/img/UFO.png"
+                    // }
+                    src={"./UFO.png"}
                     alt="UFO"
                 />
                 <div className="text t1">HELLO!</div>
