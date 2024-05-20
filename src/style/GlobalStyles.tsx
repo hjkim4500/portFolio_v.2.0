@@ -1,22 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-
+import { fonts } from "./font";
 const GlobalStyles = createGlobalStyle` 
 ${reset}
-@font-face {
-	font-family: 'OrbitronBlack';
-	font-style: normal;
-	font-weight: bold;
-	src: url('/OrbitronBlack.ttf') format('truetype');
-
-}
-@font-face {
-	font-family: 'OrbitronMedium';
-	font-style: normal;
-	font-weight: bold;
-	src: url('/OrbitronMedium.ttf') format('truetype');
-
-}
+${fonts}
 
 * {
 	box-sizing: border-box;

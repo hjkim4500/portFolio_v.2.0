@@ -7,7 +7,23 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import StarsParticle from "./Component/StarsParticle";
-
+import ufoImage from "./img/UFO.png";
+import picture1 from "./img/picture1.jpg";
+import icon_HTML from "./img/icon_HTML.png";
+import icon_CSS from "./img/icon_CSS.png";
+import icon_JS from "./img/icon_JS.png";
+import icon_Typescript from "./img/icon_Typescript.png";
+import icon_React from "./img/icon_React.png";
+import icon_recoil from "./img/icon_recoil.png";
+import icon_StyledComponent from "./img/icon_StyledComponent.png";
+import icon_ReactQuery from "./img/icon_ReactQuery.png";
+import icon_FramerMotion from "./img/icon_FramerMotion.png";
+import icon_NextJS from "./img/icon_NextJS.png";
+import Alob from "./img/Alob.png";
+import DesignComma from "./img/DesignComma.png";
+import JhcTour from "./img/JhcTour.png";
+import Mems from "./img/Mems.png";
+import MyImg from "./img/MyImg.jpeg";
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 interface PlanetProps {
     width: string;
@@ -25,7 +41,7 @@ const commonStyles = css`
     backface-visibility: hidden;
     .Header {
         h2 {
-            font-family: "OrbitronBlack", sans-serif;
+            font-family: "Orbitron", sans-serif;
             color: #02dbc6;
             font-size: 25px;
             margin-bottom: 15px;
@@ -50,7 +66,7 @@ const commonStyles = css`
 
             p {
                 font-size: 15px;
-                font-family: "OrbitronBlack", sans-serif;
+                font-family: "Orbitron", sans-serif;
                 color: white;
             }
         }
@@ -86,7 +102,7 @@ const Section = styled.div`
             transform: translateY(0px); /* 시작 위치를 아래로 조정합니다. */
             position: absolute;
             color: #02dbc6;
-            font-family: "OrbitronBlack", sans-serif;
+            font-family: "Orbitron", sans-serif;
         }
         img {
             width: 150px;
@@ -109,7 +125,7 @@ const Section = styled.div`
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            font-family: "OrbitronBlack", sans-serif;
+            font-family: "Orbitron", sans-serif;
             color: #02dbc6;
             font-size: 3vw;
             z-index: 50;
@@ -162,7 +178,7 @@ const Section = styled.div`
             }
 
             a {
-                font-family: "OrbitronBlack", sans-serif;
+                font-family: "Orbitron", sans-serif;
                 text-align: right;
                 color: #02dbc6;
             }
@@ -180,7 +196,7 @@ const Section = styled.div`
                 transform: translate(-50%, -50%);
                 color: white;
                 font-size: 2vw;
-                font-family: "OrbitronBlack", sans-serif;
+                font-family: "Orbitron", sans-serif;
                 text-align: center;
                 h2 {
                     color: #02dbc6;
@@ -248,7 +264,7 @@ const Section = styled.div`
                 transform: translate(-50%, -50%);
                 color: white;
                 font-size: 2vw;
-                font-family: "OrbitronBlack", sans-serif;
+                font-family: "Orbitron", sans-serif;
                 text-align: center;
                 h2 {
                     color: #02dbc6;
@@ -286,7 +302,7 @@ const Section = styled.div`
                     border-bottom: 1px solid #02dbc6;
 
                     h2 {
-                        font-family: "OrbitronBlack", sans-serif;
+                        font-family: "Orbitron", sans-serif;
                         color: #02dbc6;
                         font-size: 25px;
                         margin-right: 15px;
@@ -298,7 +314,7 @@ const Section = styled.div`
                 }
                 .Content {
                     h2 {
-                        font-family: "OrbitronBlack", sans-serif;
+                        font-family: "Orbitron", sans-serif;
                         color: #02dbc6;
                         font-size: 18px;
                         margin-bottom: 15px;
@@ -313,7 +329,7 @@ const Section = styled.div`
                 .DoingThings {
                     margin-bottom: 15px;
                     h2 {
-                        font-family: "OrbitronBlack", sans-serif;
+                        font-family: "Orbitron", sans-serif;
                         color: #02dbc6;
                         font-size: 18px;
                         margin-bottom: 15px;
@@ -356,7 +372,7 @@ const Section = styled.div`
 
                 /* display: inline-block; */
                 white-space: nowrap;
-                font-family: "OrbitronBlack", sans-serif;
+                font-family: "Orbitron", sans-serif;
                 /* transform: translate(-100%, 0px); */
 
                 &.l {
@@ -386,7 +402,7 @@ const Section = styled.div`
             max-width: 1000px;
             .MyInfo {
                 .Header {
-                    font-family: "OrbitronBlack", sans-serif;
+                    font-family: "Orbitron", sans-serif;
                     color: #02dbc6;
                     font-size: 35px;
                     padding: 10px;
@@ -477,7 +493,7 @@ const Planet = styled.div<PlanetProps>`
 const InfoBox = styled.div`
     padding: 10px;
     h2 {
-        font-family: "OrbitronBlack", sans-serif;
+        font-family: "Orbitron", sans-serif;
         color: #02dbc6;
         font-size: 25px;
         margin-bottom: 10px;
@@ -876,13 +892,7 @@ function App() {
         c-48.51,78.99,148,158,148,158"
                     />
                 </svg>
-                <img
-                    ref={ufoElementRef}
-                    src={
-                        "https://github.com/hjkim4500/portFolio_v.2.0/blob/master/public/UFO.PNG?raw=true"
-                    }
-                    alt="UFO"
-                />
+                <img ref={ufoElementRef} src={ufoImage} alt="UFO" />
                 <div className="text t1">HELLO!</div>
                 <div className="text t2">I'M FRONTEND</div>
                 <div className="text t3">DEVELOPER!</div>
@@ -930,12 +940,7 @@ function App() {
                     </div>
                 </div>
                 <div className="ImgWrap">
-                    <img
-                        src={
-                            "https://github.com/hjkim4500/portFolio_v.2.0/blob/master/public/picture1.jpg?raw=true"
-                        }
-                        alt="developer"
-                    />
+                    <img src={picture1} alt="developer" />
                 </div>
                 <div className="EffortText">
                     <p>
@@ -961,7 +966,7 @@ function App() {
                             </div>
                             <div className="HTML thingsWrap">
                                 <div className="Wrap">
-                                    <img src={"/icon_HTML.png"} alt="HTML" />
+                                    <img src={icon_HTML} alt="HTML" />
                                     <p>
                                         HTML 태그 왠만한 태그 부분은 다 알고
                                         있으며, 누구보다 빠르게 태그 배치를 할
@@ -976,7 +981,7 @@ function App() {
                             </div>
                             <div className="CSS thingsWrap">
                                 <div className="Wrap">
-                                    <img src={"/icon_CSS.png"} alt="CSS" />
+                                    <img src={icon_CSS} alt="CSS" />
                                     <p>
                                         CSS는 기본적인 스타일링을 할 수 있으며,
                                         SCSS를 사용해 변수, mixin, 함수 등을
@@ -992,10 +997,7 @@ function App() {
                             </div>
                             <div className="JavaScript thingsWrap">
                                 <div className="Wrap">
-                                    <img
-                                        src={"/icon_JS.png"}
-                                        alt="JavaScript"
-                                    />
+                                    <img src={icon_JS} alt="JavaScript" />
                                     <p>
                                         JavaScript를 사용해 DOM 조작, 이벤트
                                         처리, 비동기 처리 등을 할 수 있으며, ES6
@@ -1011,7 +1013,7 @@ function App() {
                             <div className="TypeScript thingsWrap">
                                 <div className="Wrap">
                                     <img
-                                        src={"/icon_Typescript.png"}
+                                        src={icon_Typescript}
                                         alt="Typescript"
                                     />
                                     <p>
@@ -1034,7 +1036,7 @@ function App() {
                             </div>
                             <div className="React thingsWrap">
                                 <div className="Wrap">
-                                    <img src={"/icon_React.png"} alt="React" />
+                                    <img src={icon_React} alt="React" />
                                     <p>
                                         React를 사용해 컴포넌트 기반의
                                         프로그래밍을 할 수 있으며, Hook을 사용해
@@ -1051,17 +1053,14 @@ function App() {
                                 <h2>Used Libraries</h2>
                             </div>
                             <div className="reactThing">
-                                <img src="/icon_recoil.png" alt="recoil" />
+                                <img src={icon_recoil} alt="recoil" />
                                 <img
-                                    src="/icon_StyledComponent.png"
+                                    src={icon_StyledComponent}
                                     alt="styledcomponent"
                                 />
+                                <img src={icon_ReactQuery} alt="ReactQuery" />
                                 <img
-                                    src="/icon_ReactQuery.png"
-                                    alt="ReactQuery"
-                                />
-                                <img
-                                    src="/icon_FramerMotion.png"
+                                    src={icon_FramerMotion}
                                     alt="FramerMotion"
                                 />
                             </div>
@@ -1069,7 +1068,7 @@ function App() {
                                 <h2>Studying Libraries</h2>
                             </div>
                             <div className="studyThing">
-                                <img src="/icon_Nextjs.png" alt="Nextjs" />
+                                <img src={icon_NextJS} alt="Nextjs" />
                             </div>
                         </div>
                     </div>
@@ -1100,13 +1099,10 @@ function App() {
                         <div className="DoingThings">
                             <h2>Doing Things</h2>
                             <div className="imgThings">
-                                <img src="/Alob.png" alt="Alob" />
-                                <img
-                                    src="/Design_Comma.png"
-                                    alt="Design_Comma"
-                                />
-                                <img src="/jhc_tour.png" alt="jhc_tour" />
-                                <img src="/mems.png" alt="mems" />
+                                <img src={Alob} alt="Alob" />
+                                <img src={DesignComma} alt="Design_Comma" />
+                                <img src={JhcTour} alt="jhc_tour" />
+                                <img src={Mems} alt="mems" />
                             </div>
                         </div>
                     </div>
@@ -1200,7 +1196,7 @@ function App() {
             <Section className="section5">
                 <div className="Content">
                     <div className="MyImg">
-                        <img src="/MyImg.jpeg" alt="MyImg" />
+                        <img src={MyImg} alt="MyImg" />
                     </div>
                     <div className="MyInfo">
                         <div className="Header">Contact Me</div>

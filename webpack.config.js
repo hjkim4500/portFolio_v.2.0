@@ -39,10 +39,19 @@ module.exports = (argv) => {
                     use: ["style-loader", "css-loader", "sass-loader"],
                 },
                 {
-                    test: /\.(png|jpe?g|gif)$/i,
+                    test: /\.(png|jpeg|jpg)$/i,
+                    type: "asset/resource",
+                },
+
+                {
+                    test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
                     use: [
                         {
                             loader: "file-loader",
+                            options: {
+                                name: "[name].[ext]",
+                                outputPath: "fonts/",
+                            },
                         },
                     ],
                 },

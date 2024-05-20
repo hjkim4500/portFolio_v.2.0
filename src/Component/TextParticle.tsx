@@ -192,7 +192,7 @@ function TextParticle() {
                 this.textY,
                 letterSpacing
             );
-            this.context.font = this.fontSize + "px 'OrbitronBlack'";
+            this.context.font = this.fontSize + "px 'Orbitron'";
 
             //break multiline text
             let linesArray = [];
