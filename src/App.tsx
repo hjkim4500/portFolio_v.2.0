@@ -878,7 +878,7 @@ function App() {
                 </svg>
                 <img
                     ref={ufoElementRef}
-                    src={"/blob/master/public/UFO.PNG?raw=true"}
+                    src={"./blob/master/public/UFO.PNG?raw=true"}
                     alt="UFO"
                 />
                 <div className="text t1">HELLO!</div>
