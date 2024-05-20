@@ -7,14 +7,14 @@ ${reset}
 	font-family: 'OrbitronBlack';
 	font-style: normal;
 	font-weight: bold;
-	src: url('./OrbitronBlack.ttf') format('truetype');
+	src: url('/OrbitronBlack.ttf') format('truetype');
 
 }
 @font-face {
 	font-family: 'OrbitronMedium';
 	font-style: normal;
 	font-weight: bold;
-	src: url('./OrbitronMedium.ttf') format('truetype');
+	src: url('/OrbitronMedium.ttf') format('truetype');
 
 }
 

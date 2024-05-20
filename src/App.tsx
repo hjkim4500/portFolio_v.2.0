@@ -878,8 +878,10 @@ function App() {
                 </svg>
                 <img
                     ref={ufoElementRef}
-                    // src={'https://hjkim4500.github.io/portFolio_v.2.0/assets/img/UFO.png'}
-                    src={"./UFO.png"}
+                    src={
+                        "https://hjkim4500.github.io/portFolio_v.2.0/assets/img/UFO.png"
+                    }
+                    // src={"./UFO.png"}
                     alt="UFO"
                 />
                 <div className="text t1">HELLO!</div>
@@ -929,7 +931,7 @@ function App() {
                     </div>
                 </div>
                 <div className="ImgWrap">
-                    <img src={"./picture1.jpg"} alt="developer" />
+                    <img src={"/picture1.jpg"} alt="developer" />
                 </div>
                 <div className="EffortText">
                     <p>
@@ -955,7 +957,7 @@ function App() {
                             </div>
                             <div className="HTML thingsWrap">
                                 <div className="Wrap">
-                                    <img src={"./icon_HTML.png"} alt="HTML" />
+                                    <img src={"/icon_HTML.png"} alt="HTML" />
                                     <p>
                                         HTML 태그 왠만한 태그 부분은 다 알고
                                         있으며, 누구보다 빠르게 태그 배치를 할
@@ -970,7 +972,7 @@ function App() {
                             </div>
                             <div className="CSS thingsWrap">
                                 <div className="Wrap">
-                                    <img src={"./icon_CSS.png"} alt="CSS" />
+                                    <img src={"/icon_CSS.png"} alt="CSS" />
                                     <p>
                                         CSS는 기본적인 스타일링을 할 수 있으며,
                                         SCSS를 사용해 변수, mixin, 함수 등을
@@ -987,7 +989,7 @@ function App() {
                             <div className="JavaScript thingsWrap">
                                 <div className="Wrap">
                                     <img
-                                        src={"./icon_JS.png"}
+                                        src={"/icon_JS.png"}
                                         alt="JavaScript"
                                     />
                                     <p>
@@ -1005,7 +1007,7 @@ function App() {
                             <div className="TypeScript thingsWrap">
                                 <div className="Wrap">
                                     <img
-                                        src={"./icon_Typescript.png"}
+                                        src={"/icon_Typescript.png"}
                                         alt="Typescript"
                                     />
                                     <p>
@@ -1028,7 +1030,7 @@ function App() {
                             </div>
                             <div className="React thingsWrap">
                                 <div className="Wrap">
-                                    <img src={"./icon_React.png"} alt="React" />
+                                    <img src={"/icon_React.png"} alt="React" />
                                     <p>
                                         React를 사용해 컴포넌트 기반의
                                         프로그래밍을 할 수 있으며, Hook을 사용해
@@ -1045,17 +1047,17 @@ function App() {
                                 <h2>Used Libraries</h2>
                             </div>
                             <div className="reactThing">
-                                <img src="./icon_recoil.png" alt="recoil" />
+                                <img src="/icon_recoil.png" alt="recoil" />
                                 <img
-                                    src="./icon_StyledComponent.png"
+                                    src="/icon_StyledComponent.png"
                                     alt="styledcomponent"
                                 />
                                 <img
-                                    src="./icon_ReactQuery.png"
+                                    src="/icon_ReactQuery.png"
                                     alt="ReactQuery"
                                 />
                                 <img
-                                    src="./icon_FramerMotion.png"
+                                    src="/icon_FramerMotion.png"
                                     alt="FramerMotion"
                                 />
                             </div>
@@ -1063,7 +1065,7 @@ function App() {
                                 <h2>Studying Libraries</h2>
                             </div>
                             <div className="studyThing">
-                                <img src="./icon_Nextjs.png" alt="Nextjs" />
+                                <img src="/icon_Nextjs.png" alt="Nextjs" />
                             </div>
                         </div>
                     </div>
@@ -1094,13 +1096,13 @@ function App() {
                         <div className="DoingThings">
                             <h2>Doing Things</h2>
                             <div className="imgThings">
-                                <img src="./Alob.png" alt="Alob" />
+                                <img src="/Alob.png" alt="Alob" />
                                 <img
-                                    src="./Design_Comma.png"
+                                    src="/Design_Comma.png"
                                     alt="Design_Comma"
                                 />
-                                <img src="./jhc_tour.png" alt="jhc_tour" />
-                                <img src="./mems.png" alt="mems" />
+                                <img src="/jhc_tour.png" alt="jhc_tour" />
+                                <img src="/mems.png" alt="mems" />
                             </div>
                         </div>
                     </div>
@@ -1194,7 +1196,7 @@ function App() {
             <Section className="section5">
                 <div className="Content">
                     <div className="MyImg">
-                        <img src="./MyImg.jpeg" alt="MyImg" />
+                        <img src="/MyImg.jpeg" alt="MyImg" />
                     </div>
                     <div className="MyInfo">
                         <div className="Header">Contact Me</div>
