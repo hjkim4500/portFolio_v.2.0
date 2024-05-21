@@ -105,7 +105,8 @@ const Section = styled.div`
             font-family: "Orbitron", sans-serif;
         }
         img {
-            width: 150px;
+            max-width: 150px;
+            width: 15vw;
             position: absolute;
         }
     }
@@ -128,6 +129,7 @@ const Section = styled.div`
             font-family: "Orbitron", sans-serif;
             color: #02dbc6;
             font-size: 3vw;
+
             z-index: 50;
             .textWrap {
                 height: 4vw;
@@ -159,11 +161,13 @@ const Section = styled.div`
             overflow: hidden;
             border-radius: 10px;
             opacity: 0;
+            height: 100%;
 
             img {
-                max-width: initial;
+                object-fit: cover;
+                height: 100%;
                 width: 200%;
-                margin-bottom: 50%;
+                /* margin-bottom: 50%; */
             }
         }
         .EffortText {
@@ -172,7 +176,7 @@ const Section = styled.div`
             right: 5%;
             color: white;
             line-height: 1.3;
-            font-size: 1.5vw;
+            font-size: 2vw;
             p {
                 text-align: left;
             }
@@ -209,6 +213,7 @@ const Section = styled.div`
                 height: 75%;
                 top: 50%;
                 left: 50%;
+                line-height: 1.2;
                 transform: translate(-50%, -50%);
                 box-shadow: 0 0 2vw rgba(0, 255, 255, 0.5),
                     0 0 1vw rgba(255, 255, 255, 0.2);
@@ -277,7 +282,7 @@ const Section = styled.div`
                     0 0 1vw rgba(255, 255, 255, 0.2);
                 border-radius: 10px;
                 width: 360px;
-
+                /* z-index: 50; */
                 height: auto;
                 position: absolute;
                 /* top: 50%;
@@ -309,6 +314,7 @@ const Section = styled.div`
                     }
                     p {
                         color: white;
+                        line-height: 1.2;
                         font-size: 15px;
                     }
                 }
@@ -376,11 +382,11 @@ const Section = styled.div`
                 /* transform: translate(-100%, 0px); */
 
                 &.l {
-                    transform: translate(-80%, 0px);
+                    transform: translate(-30%, 0px);
                     color: white;
                 }
                 &.r {
-                    transform: translate(-100%, 0px);
+                    transform: translate(-120%, 0px);
                     color: #02dbc6;
                 }
             }
@@ -396,7 +402,7 @@ const Section = styled.div`
             border-radius: 10px;
             display: flex;
             flex-direction: row;
-            justify-content: space-evenly;
+            justify-content: space-around;
             margin: 5vw;
             padding: 20px;
             max-width: 1000px;
@@ -407,6 +413,21 @@ const Section = styled.div`
                     font-size: 35px;
                     padding: 10px;
                     margin-bottom: 10px;
+                }
+                .Introduce {
+                    padding: 10px;
+                    h2 {
+                        font-family: "Orbitron", sans-serif;
+                        color: #02dbc6;
+                        font-size: 25px;
+                        margin-bottom: 10px;
+                    }
+                    p {
+                        font-size: 20px;
+                        color: white;
+                        margin-bottom: 10px;
+                        line-height: 1.2;
+                    }
                 }
             }
             .MyImg {
@@ -419,6 +440,28 @@ const Section = styled.div`
             @media (max-width: 768px) {
                 flex-direction: column;
                 align-items: center;
+                .MyImg {
+                    width: 40%;
+                }
+                h2 {
+                    font-size: 20px;
+                }
+                p {
+                    font-size: 15px;
+                }
+                .MyInfo {
+                    .Header {
+                        font-size: 25px;
+                    }
+                    .Introduce {
+                        h2 {
+                            font-size: 20px;
+                        }
+                        p {
+                            font-size: 15px;
+                        }
+                    }
+                }
             }
         }
     }
@@ -657,10 +700,10 @@ function App() {
                 {
                     duration: 1,
                     y: "200%",
-                    opacity: 1,
-                    maxWidth: "20%",
-                    maxHeight: "20%",
-                    bottom: "20%",
+                    // opacity: 1,
+                    // maxWidth: "20%",
+                    // maxHeight: "20%",
+                    // bottom: "20%",
                 },
                 "-=0.3"
             )
@@ -670,7 +713,7 @@ function App() {
                     duration: 1,
                     y: "0%",
                     opacity: 1,
-                    maxWidth: "100%",
+                    width: "100%",
                     maxHeight: "100%",
                     bottom: "0%",
                     fillOpacity: 1,
@@ -804,6 +847,7 @@ function App() {
                 { duration: 1.5, y: "100%", width: "20%" },
                 "-=0.1"
             )
+            .to(".developFixedThing", { duration: 1, opacity: 0.2 }, "-=0.2")
             .to(".section3 .developerWrap.first", { opacity: 1 }, "-=0.1")
             .to(".section3 .developerWrap.second", { opacity: 1 }, "-=0.1")
             .to(".section3 .P_one", { opacity: 1 }, "-=0.1")
@@ -843,20 +887,24 @@ function App() {
         Sec4.to(".marqueeContainer.l ", {
             x: "-200%",
             ease: "linear",
-            repeat: -1,
+            // repeat: -1,
             // duration: 10,
-        }).to(".marqueeContainer.r", {
-            x: "200%",
-            ease: "linear",
-            repeat: -1,
-            // duration: 10,
-        });
+        }).to(
+            ".marqueeContainer.r",
+            {
+                x: "100%",
+                ease: "linear",
+                // repeat: -1,
+                // duration: 10,
+            },
+            "-=0.5"
+        );
 
         ScrollTrigger.create({
             animation: Sec4,
             trigger: ".section4",
             start: "top top",
-            end: "+=2000",
+            end: "+=1500",
             scrub: true,
             anticipatePin: 1,
         });
@@ -1143,14 +1191,14 @@ function App() {
                         width="15"
                         height="15"
                         color1="#FFB347"
-                        color2="#FFCC5C"
+                        color2="#FFE8A1"
                     />
                     <Planet
                         className="P_three"
                         width="10"
                         height="10"
                         color1="#02dbc6"
-                        color2="#A0C4FF"
+                        color2="#0000FF"
                     />
                     <Planet
                         className="P_four"
@@ -1216,6 +1264,14 @@ function App() {
                             <h2>Codepen</h2>
                             <p>https://codepen.io/nxvsfrpj-the-looper</p>
                         </InfoBox>
+                        <div className="Introduce">
+                            <h2>Introduce</h2>
+                            <p>
+                                변화에 발맞춰 항상 공부하고, <br />
+                                어제 보다 나은 오늘이 되도록 <br />
+                                노력하는 개발자가 되겠습니다.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </Section>
