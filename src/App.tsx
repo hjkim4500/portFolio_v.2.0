@@ -43,7 +43,7 @@ const commonStyles = css`
         h2 {
             font-family: "Orbitron", sans-serif;
             color: #02dbc6;
-            font-size: 25px;
+            font-size: 23px;
             margin-bottom: 15px;
         }
     }
@@ -874,7 +874,7 @@ function App() {
             trigger: ".section3",
             start: "top top",
             endTrigger: ".section4",
-            end: "+=8000",
+            end: "+=12000",
             scrub: true,
             pin: true,
             markers: false,
